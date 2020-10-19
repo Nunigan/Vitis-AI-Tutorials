@@ -42,10 +42,12 @@ def calc_acc(testdata,testlabels,predictions):
     '''
     Accuracy calculation
     '''
+    print(predictions)
     correct_predictions = 0
     wrong_predictions = 0
     for i in range(len(testdata)):
-        if (predictions[i][0] == np.argmax(testlabels[i])):
+        # if (predictions[i][0] == np.argmax(testlabels[i])):
+        if (predictions[i] == np.argmax(testlabels[i])):
            correct_predictions += 1
         else:
             wrong_predictions += 1
@@ -62,7 +64,7 @@ def graph_eval(input_graph_def, graph, input_node, output_node):
 
     input_graph_def.ParseFromString(tf.io.gfile.GFile(graph, "rb").read())
 
-    # CIFAR-10 dataset    
+    # CIFAR-10 dataset
     (x_train,y_train), (x_test,y_test) = datadownload()
 
     tf.import_graph_def(input_graph_def,name = '')
@@ -73,20 +75,24 @@ def graph_eval(input_graph_def, graph, input_node, output_node):
 
     # get output tensors
     logits = tf.compat.v1.get_default_graph().get_tensor_by_name(output_node+':0')
-    predicted_logit = tf.compat.v1.argmax(input=logits, axis=3, output_type=tf.int32)
+    print('##################################################')
+    print(logits)
+    print('##################################################')
+
+    predicted_logit = tf.compat.v1.argmax(input=logits, axis=1, output_type=tf.int32)
 
     with tf.compat.v1.Session() as sess:
-        
+
         sess.run(tf.compat.v1.initializers.global_variables())
 
         # Run graph to get predictions
         pred = sess.run(predicted_logit, feed_dict={images_in: x_test, labels: y_test})
-    
+
     # iterate over the list of predictions and compare to ground truth
     acc = calc_acc(x_test,y_test,pred)
 
     print('Graph accuracy: {:1.2f}'.format(acc),'%',flush=True)
-    
+
     return
 
 
@@ -112,7 +118,7 @@ def main():
                     type=str,
                     default='0',
                     help='IDs of GPU cards to be used. Default is 0')
-    args = ap.parse_args()  
+    args = ap.parse_args()
 
     print('\n------------------------------------')
     print('Keras version      : ',tf.keras.__version__)
@@ -128,7 +134,7 @@ def main():
 
 
     os.environ["CUDA_DEVICE_ORDER"]='PCI_BUS_ID'
-    
+
     # indicate which GPU to use
     os.environ["CUDA_VISIBLE_DEVICES"]=args.gpu
 

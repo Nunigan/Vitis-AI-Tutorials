@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Copyright 2020 Xilinx Inc.
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -53,9 +53,9 @@ export COMP_LOG_U50=compile_u50.log
 export COMP_LOG_ZCU102=compile_zcu102.log
 
 # training parameters
-export EPOCHS=5
+export EPOCHS=10
 export LEARNRATE=0.001
-export BATCHSIZE=100
+export BATCHSIZE=128
 
 # list of GPUs to use
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
@@ -69,10 +69,9 @@ export INPUT_WIDTH=28
 export INPUT_CHAN=1
 export INPUT_SHAPE=?,${INPUT_HEIGHT},${INPUT_WIDTH},${INPUT_CHAN}
 export INPUT_NODE=images_in
-export OUTPUT_NODE=conv2d_3/BiasAdd
+export OUTPUT_NODE=dense_4/BiasAdd
 export NET_NAME=customcnn
 
 
 # number of images used in calibration
 export CALIB_IMAGES=1000
-

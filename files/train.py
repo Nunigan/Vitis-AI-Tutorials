@@ -57,13 +57,13 @@ def calc_acc(testdata,testlabels,predictions):
 
 def train(input_height,input_width,input_chan,epochs,learnrate, \
           batchsize,output_ckpt_path,infer_graph_path,tboard_path):
-    
+
     # Set up directories and files
     INFER_GRAPH_DIR = os.path.dirname(infer_graph_path)
     INFER_GRAPH_FILENAME =os.path.basename(infer_graph_path)
 
     # dataset download and preparation
-    (x_train, y_train), (x_test, y_test) = datadownload()    
+    (x_train, y_train), (x_test, y_test) = datadownload()
 
 
     # calculate total number of batches per epoch
@@ -78,10 +78,11 @@ def train(input_height,input_width,input_chan,epochs,learnrate, \
     images_in = tf.compat.v1.placeholder(tf.float32, shape=[None,input_height,input_width,input_chan], name='images_in')
     labels = tf.compat.v1.placeholder(tf.int32, shape=[None,10], name='labels')
     train = tf.compat.v1.placeholder_with_default(False, shape=None, name='train')
+    drop = tf.compat.v1.placeholder_with_default(0.0, shape=None, name='drop')
 
     # build the network, input comes from the 'images_in' placeholder
     # training mode is also driven by placeholder
-    logits = customcnn(cnn_in=images_in, is_training=train)
+    logits = customcnn(cnn_in=images_in, is_training=train, drop_rate=drop)
 
     # softmax cross entropy loss function - needs one-hot encoded labels
     loss = tf.compat.v1.reduce_mean(tf.compat.v1.losses.softmax_cross_entropy(logits=logits, onehot_labels=labels))
@@ -96,10 +97,10 @@ def train(input_height,input_width,input_chan,epochs,learnrate, \
     # Check to see if the predictions matches the labels and then
     # calculate accuracy as mean of the correct predictions
     predicted_logit = tf.compat.v1.argmax(input=logits, axis=1, output_type=tf.int32)
- 
+
     # TensorBoard data collection
     tf.compat.v1.summary.scalar('cross_entropy_loss', loss)
-    tf.compat.v1.summary.image('input_images', images_in)    
+    tf.compat.v1.summary.image('input_images', images_in)
 
     # set up saver object
     saver = tf.compat.v1.train.Saver()
@@ -130,7 +131,7 @@ def train(input_height,input_width,input_chan,epochs,learnrate, \
                                    y_train[i*batchsize:i*batchsize+batchsize]
 
                 # Run graph for optimization  - i.e. do the training
-                train_feed_dict={images_in: x_batch, labels: y_batch, train: True}
+                train_feed_dict={images_in: x_batch, labels: y_batch, train: True, drop: 0.2}
                 _, s = sess.run([train_op, tb_summary], feed_dict=train_feed_dict)
                 writer.add_summary(s, (((epoch+1)*total_batches)-1))
 
@@ -166,12 +167,12 @@ def train(input_height,input_width,input_chan,epochs,learnrate, \
       x_1 = tf.compat.v1.placeholder(tf.float32, shape=[None,input_height,input_width,input_chan], name='images_in')
 
       # call the CNN function with is_training=False
-      logits_1 = customcnn(cnn_in=x_1, is_training=False)
+      logits_1 = customcnn(cnn_in=x_1, is_training=False, drop_rate=0.0)
 
       tf.io.write_graph(tf.compat.v1.get_default_graph().as_graph_def(), INFER_GRAPH_DIR, INFER_GRAPH_FILENAME, as_text=False)
       print(' Saved binary inference graph to %s' % infer_graph_path)
 
-    
+
     print(' Run `tensorboard --logdir=%s --port 6006 --host localhost` to see the results.' % tboard_path,flush=True)
 
     return
@@ -185,19 +186,19 @@ def main():
     ap.add_argument('-ih', '--input_height',
                     type=int,
                     default=28,
-                    help='Input data height. Default is 28')                  
+                    help='Input data height. Default is 28')
     ap.add_argument('-iw', '--input_width',
                     type=int,
                     default=28,
-                    help='Input data width. Default is 28')                  
+                    help='Input data width. Default is 28')
     ap.add_argument('-ic', '--input_chan',
                     type=int,
                     default=1,
-                    help='Input data channels. Default is 1')                  
+                    help='Input data channels. Default is 1')
     ap.add_argument('-e', '--epochs',
                     type=int,
                     default=100,
-                    help='Number of training epochs. Default is 100')                  
+                    help='Number of training epochs. Default is 100')
     ap.add_argument('-l', '--learnrate',
                     type=float,
                     default=0.0001,
@@ -205,7 +206,7 @@ def main():
     ap.add_argument('-b', '--batchsize',
                     type=int,
                     default=50,
-                    help='Training batchsize. Default is 50')  
+                    help='Training batchsize. Default is 50')
     ap.add_argument('-o', '--output_ckpt_path',
                     type=str,
                     default='./chkpt/float_model.ckpt',
@@ -213,7 +214,7 @@ def main():
     ap.add_argument('-ig', '--infer_graph_path',
                     type=str,
                     default='./chkpt/inference_graph.pb',
-                    help='Path and filename of inference graph. Default is ./chkpt/inference_graph.pb')        
+                    help='Path and filename of inference graph. Default is ./chkpt/inference_graph.pb')
     ap.add_argument('-t', '--tboard_path',
                     type=str,
                     default='./tb_log',
@@ -221,8 +222,8 @@ def main():
     ap.add_argument('-g', '--gpu',
                     type=str,
                     default='0',
-                    help='IDs of GPU cards to be used. Default is 0')                  
-    args = ap.parse_args() 
+                    help='IDs of GPU cards to be used. Default is 0')
+    args = ap.parse_args()
 
 
     print('\n------------------------------------')
@@ -246,7 +247,7 @@ def main():
 
 
     os.environ["CUDA_DEVICE_ORDER"]='PCI_BUS_ID'
-    
+
     # indicate which GPU to use
     os.environ["CUDA_VISIBLE_DEVICES"]=args.gpu
 
@@ -257,4 +258,3 @@ def main():
 
 if __name__ == '__main__':
   main()
-

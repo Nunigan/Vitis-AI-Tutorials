@@ -35,33 +35,59 @@ from datadownload import datadownload
 
 
 
-def customcnn(cnn_in, is_training):
+def customcnn(cnn_in, is_training, drop_rate):
 
     print('Network input shape: ',cnn_in.shape)
-
+    #
     net = tf.compat.v1.layers.conv2d(inputs=cnn_in, filters=16, kernel_size=5, strides=2, padding='same')
     net = tf.compat.v1.layers.batch_normalization(inputs=net, training=is_training)
     net = tf.nn.relu(net)
+    net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
+
+    # print('                     ',net.shape)
+    #
+    # net = tf.compat.v1.layers.conv2d(inputs=net, filters=32, kernel_size=5, strides=2, padding='same')
+    # net = tf.compat.v1.layers.batch_normalization(inputs=net, training=is_training)
+    # net = tf.nn.relu(net)
+    # net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
+    # print('                     ',net.shape)
+    #
+    # net = tf.compat.v1.layers.conv2d(inputs=net, filters=64, kernel_size=3, strides=2, padding='same')
+    # net = tf.compat.v1.layers.batch_normalization(inputs=net, training=is_training)
+    # net = tf.nn.relu(net)
+    # net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
+    #
+    # print('                     ',net.shape)
+    #
+    # h = net.shape[1]
+    # w = net.shape[2]
+    # net = tf.compat.v1.layers.conv2d(inputs=net, filters=10, kernel_size=(h,w), strides=(h,w), padding='valid')
+    # net = tf.compat.v1.layers.batch_normalization(inputs=net, training=is_training)
+    # net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
+    #
+    # logits = tf.compat.v1.layers.flatten(inputs=net)
+    net = tf.compat.v1.layers.flatten(inputs=net)
+    net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
+    net = tf.compat.v1.layers.dense(inputs=net, units=1024)
     print('                     ',net.shape)
 
-    net = tf.compat.v1.layers.conv2d(inputs=net, filters=32, kernel_size=5, strides=2, padding='same')
-    net = tf.compat.v1.layers.batch_normalization(inputs=net, training=is_training)
-    net = tf.nn.relu(net)
+    net = tf.compat.v1.layers.flatten(inputs=net)
+    net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
+    net = tf.compat.v1.layers.dense(inputs=net, units=512)
     print('                     ',net.shape)
 
-    net = tf.compat.v1.layers.conv2d(inputs=net, filters=64, kernel_size=3, strides=2, padding='same')
-    net = tf.compat.v1.layers.batch_normalization(inputs=net, training=is_training)
-    net = tf.nn.relu(net)
+    net = tf.compat.v1.layers.flatten(inputs=net)
+    net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
+    net = tf.compat.v1.layers.dense(inputs=net, units=256)
     print('                     ',net.shape)
 
-    h = net.shape[1]
-    w = net.shape[2]
-    net = tf.compat.v1.layers.conv2d(inputs=net, filters=10, kernel_size=(h,w), strides=(h,w), padding='valid')
-    net = tf.compat.v1.layers.batch_normalization(inputs=net, training=is_training)
+    net = tf.compat.v1.layers.flatten(inputs=net)
+    net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
+    net = tf.compat.v1.layers.dense(inputs=net, units=128)
     print('                     ',net.shape)
-    
-    logits = tf.compat.v1.layers.flatten(inputs=net)
+
+    logits =  tf.compat.v1.layers.dense(inputs=net, units=10, activation=None)
+
     print('Network output shape:',logits.shape)
 
     return logits
-
