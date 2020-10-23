@@ -40,7 +40,8 @@ run_quant() {
 		--output_nodes       ${OUTPUT_NODE} \
 		--input_shapes       ${INPUT_SHAPE} \
 		--calib_iter         100 \
-    --gpu                ${CUDA_VISIBLE_DEVICES}
+    --gpu                ${CUDA_VISIBLE_DEVICES}\
+    --weight_bit 32
 }
 
 

@@ -1,0 +1,106 @@
+WARNING:tensorflow:From /workspace/customcnn.py:42: conv2d (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.keras.layers.Conv2D` instead.
+WARNING:tensorflow:From /opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/python/layers/convolutional.py:424: Layer.apply (from tensorflow.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `layer.__call__` method instead.
+WARNING:tensorflow:From /workspace/customcnn.py:43: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
+
+WARNING:tensorflow:From /workspace/customcnn.py:49: batch_normalization (from tensorflow.python.layers.normalization) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.BatchNormalization instead.  In particular, `tf.control_dependencies(tf.GraphKeys.UPDATE_OPS)` should not be used (consult the `tf.keras.layers.batch_normalization` documentation).
+WARNING:tensorflow:From /workspace/customcnn.py:51: dropout (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dropout instead.
+WARNING:tensorflow:From /workspace/customcnn.py:74: flatten (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.flatten instead.
+WARNING:tensorflow:From /workspace/customcnn.py:76: dense (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.Dense instead.
+WARNING:tensorflow:From /opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/python/ops/losses/losses_impl.py:121: where (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.where in 2.0, which has the same broadcast rule as np.where
+
+------------------------------------
+Keras version      : 2.2.4-tf
+TensorFlow version : 1.15.2
+Python version     : 3.6.10 |Anaconda, Inc.| (default, Mar 25 2020, 23:51:54) 
+[GCC 7.3.0]
+------------------------------------
+Command line options:
+ --input_height    :  28
+ --input_width     :  28
+ --input_chan      :  1
+ --epochs          :  10
+ --batchsize       :  128
+ --learnrate       :  0.001
+ --output_ckpt_path:  ./build/chkpts/float_model.ckpt
+ --infer_graph_path:  ./build/chkpts/inference_graph.pb
+ --tboard_path     :  ./build/tb_logs
+ --gpu             :  0
+------------------------------------
+
+Network input shape:  (?, 28, 28, 1)
+                      (?, 14, 14, 16)
+###########################
+('conv2d', 'BiasAdd:0')
+conv2d/kernel:0
+###########################
+                      (?, 256)
+###########################
+('dense', 'BiasAdd:0')
+dense/kernel:0
+###########################
+                      (?, 128)
+###########################
+('dense_1', 'BiasAdd:0')
+dense_1/kernel:0
+###########################
+Network output shape: (?, 10)
+###########################
+('dense_2', 'BiasAdd:0')
+dense_1/kernel:0
+###########################
+
+----------------------------
+ TRAINING STARTED...
+----------------------------
+ Epoch 1 / 10 - accuracy 94.10 %
+ Epoch 2 / 10 - accuracy 95.58 %
+ Epoch 3 / 10 - accuracy 96.44 %
+ Epoch 4 / 10 - accuracy 96.44 %
+ Epoch 5 / 10 - accuracy 96.96 %
+ Epoch 6 / 10 - accuracy 96.98 %
+ Epoch 7 / 10 - accuracy 97.30 %
+ Epoch 8 / 10 - accuracy 97.52 %
+ Epoch 9 / 10 - accuracy 97.24 %
+ Epoch 10 / 10 - accuracy 97.44 %
+
+----------------------------
+ SAVING CHECKPOINT & GRAPH...
+----------------------------
+ Saved checkpoint to ./build/chkpts/float_model.ckpt
+Network input shape:  (?, 28, 28, 1)
+                      (?, 14, 14, 16)
+###########################
+('conv2d', 'BiasAdd:0')
+conv2d/kernel:0
+###########################
+                      (?, 256)
+###########################
+('dense', 'BiasAdd:0')
+dense/kernel:0
+###########################
+                      (?, 128)
+###########################
+('dense_1', 'BiasAdd:0')
+dense_1/kernel:0
+###########################
+Network output shape: (?, 10)
+###########################
+('dense_2', 'BiasAdd:0')
+dense_1/kernel:0
+###########################
+ Saved binary inference graph to ./build/chkpts/inference_graph.pb
+ Run `tensorboard --logdir=./build/tb_logs --port 6006 --host localhost` to see the results.

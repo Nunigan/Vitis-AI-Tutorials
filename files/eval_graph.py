@@ -72,7 +72,9 @@ def graph_eval(input_graph_def, graph, input_node, output_node):
     # Get input placeholders & tensors
     images_in = tf.compat.v1.get_default_graph().get_tensor_by_name(input_node+':0')
     labels = tf.compat.v1.placeholder(tf.int32, shape=[None,10], name='labels')
-
+    
+    
+    
     # get output tensors
     logits = tf.compat.v1.get_default_graph().get_tensor_by_name(output_node+':0')
     print('##################################################')
@@ -84,7 +86,8 @@ def graph_eval(input_graph_def, graph, input_node, output_node):
     with tf.compat.v1.Session() as sess:
 
         sess.run(tf.compat.v1.initializers.global_variables())
-
+        weights = tf.compat.v1.get_default_graph().get_tensor_by_name('conv2d/kernel:0')
+        print(weights.eval())
         # Run graph to get predictions
         pred = sess.run(predicted_logit, feed_dict={images_in: x_test, labels: y_test})
 

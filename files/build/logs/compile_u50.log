@@ -1,0 +1,18 @@
+[INFO] parse raw model :  0%|          | 0/35 [00:00<?, ?it/s]                           [INFO] parse raw model :100%|##########| 35/35 [00:00<00:00, 27999.36it/s]               
+[INFO] generate xmodel :  0%|          | 0/49 [00:00<?, ?it/s]                           [INFO] generate xmodel :100%|##########| 49/49 [00:00<00:00, 683.17it/s]                 
+[INFO] ignore pretty_errors package
+[INFO] Namespace(infer_shape=False, inputs_shape=None, layout='NHWC', model_files=['./build/quantize/quantize_eval_model.pb'], model_type='tensorflow', out_filename='./build/compile_u50/customcnn_org.xmodel', proto=None)
+[INFO] tensorflow model: build/quantize/quantize_eval_model.pb
+[INFO] generate xmodel: /workspace/build/compile_u50/customcnn_org.xmodel
+[UNILOG][INFO] The compiler log will be dumped at "/tmp/nunigan/log/xcompiler-20201015-025401-5482"
+[UNILOG][INFO] Target architecture: DPUCAHX8H_VAI1_2_U50
+[UNILOG][INFO] Compile mode: dpu
+[UNILOG][INFO] Begin to compile...
+[UNILOG][INFO] Graph name: quantize_eval_model, with op num: 63
+[UNILOG][INFO] Compile done.
+[UNILOG][INFO] The meta json is saved to "/workspace/./build/compile_u50/meta.json"
+[UNILOG][INFO] The compiled xmodel is saved to "/workspace/./build/compile_u50/customcnn.xmodel"
+[UNILOG][INFO] The compiled xmodel's md5sum is a4962565c93c48656f6d5c4c720a8a8c, and been saved to "/workspace/./build/compile_u50/md5sum.txt"
+**************************************************
+* VITIS_AI Compilation - Xilinx Inc.
+**************************************************

@@ -69,7 +69,7 @@ export INPUT_WIDTH=28
 export INPUT_CHAN=1
 export INPUT_SHAPE=?,${INPUT_HEIGHT},${INPUT_WIDTH},${INPUT_CHAN}
 export INPUT_NODE=images_in
-export OUTPUT_NODE=dense_4/BiasAdd
+export OUTPUT_NODE=dense_2/BiasAdd
 export NET_NAME=customcnn
 
 

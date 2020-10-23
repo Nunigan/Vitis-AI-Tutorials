@@ -40,11 +40,16 @@ def customcnn(cnn_in, is_training, drop_rate):
     print('Network input shape: ',cnn_in.shape)
     #
     net = tf.compat.v1.layers.conv2d(inputs=cnn_in, filters=16, kernel_size=5, strides=2, padding='same')
+    weights = tf.get_default_graph().get_tensor_by_name(os.path.split(net.name)[0] + '/kernel:0')
+    print('                     ',net.shape)
+    print('###########################')
+    print(os.path.split(net.name))
+    print(os.path.split(net.name)[0] + '/kernel:0')
+    print('###########################')
     net = tf.compat.v1.layers.batch_normalization(inputs=net, training=is_training)
     net = tf.nn.relu(net)
     net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
 
-    # print('                     ',net.shape)
     #
     # net = tf.compat.v1.layers.conv2d(inputs=net, filters=32, kernel_size=5, strides=2, padding='same')
     # net = tf.compat.v1.layers.batch_normalization(inputs=net, training=is_training)
@@ -68,26 +73,26 @@ def customcnn(cnn_in, is_training, drop_rate):
     # logits = tf.compat.v1.layers.flatten(inputs=net)
     net = tf.compat.v1.layers.flatten(inputs=net)
     net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
-    net = tf.compat.v1.layers.dense(inputs=net, units=1024)
-    print('                     ',net.shape)
-
-    net = tf.compat.v1.layers.flatten(inputs=net)
-    net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
-    net = tf.compat.v1.layers.dense(inputs=net, units=512)
-    print('                     ',net.shape)
-
-    net = tf.compat.v1.layers.flatten(inputs=net)
-    net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
     net = tf.compat.v1.layers.dense(inputs=net, units=256)
     print('                     ',net.shape)
-
-    net = tf.compat.v1.layers.flatten(inputs=net)
+    print('###########################')
+    print(os.path.split(net.name))
+    print(os.path.split(net.name)[0] + '/kernel:0')
+    print('###########################')
     net = tf.compat.v1.layers.dropout(inputs=net, rate=drop_rate, training=is_training)
     net = tf.compat.v1.layers.dense(inputs=net, units=128)
     print('                     ',net.shape)
-
+    print('###########################')
+    print(os.path.split(net.name))
+    print(os.path.split(net.name)[0] + '/kernel:0')
+    print('###########################')
+    
     logits =  tf.compat.v1.layers.dense(inputs=net, units=10, activation=None)
 
     print('Network output shape:',logits.shape)
+    print('###########################')
+    print(os.path.split(logits.name))
+    print(os.path.split(net.name)[0] + '/kernel:0')
+    print('###########################')
 
     return logits

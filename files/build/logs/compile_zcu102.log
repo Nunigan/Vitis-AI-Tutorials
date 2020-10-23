@@ -1,0 +1,34 @@
+
+Kernel topology "customcnn_kernel_graph.jpg" for network "customcnn"
+kernel list info for network "customcnn"
+                               Kernel ID : Name
+                                       0 : customcnn
+
+                             Kernel Name : customcnn
+--------------------------------------------------------------------------------
+                             Kernel Type : DPUKernel
+                               Code Size : 0.03MB
+                              Param Size : 3.72MB
+                           Workload MACs : 7.96MOPS
+                         IO Memory Space : 4.95KB
+                              Mean Value : 0, 0, 0, 
+                      Total Tensor Count : 7
+                Boundary Input Tensor(s)   (H*W*C)
+                          images_in:0(0) : 28*28*1
+
+               Boundary Output Tensor(s)   (H*W*C)
+                     dense_4_MatMul:0(0) : 1*1*10
+
+                        Total Node Count : 6
+                           Input Node(s)   (H*W*C)
+                        conv2d_Conv2D(0) : 28*28*1
+
+                          Output Node(s)   (H*W*C)
+                       dense_4_MatMul(0) : 1*1*10
+
+
+
+
+**************************************************
+* VITIS_AI Compilation - Xilinx Inc.
+**************************************************
