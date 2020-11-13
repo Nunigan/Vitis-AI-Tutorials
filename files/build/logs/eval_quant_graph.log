@@ -1,0 +1,19 @@
+
+------------------------------------
+Keras version      :  2.2.4-tf
+TensorFlow version :  1.15.2
+3.6.10 |Anaconda, Inc.| (default, Mar 25 2020, 23:51:54) 
+[GCC 7.3.0]
+------------------------------------
+Command line options:
+ --graph      :  ./build/quantize/quantize_eval_model.pb
+ --input_node :  images_in
+ --output_node:  dense_1/BiasAdd
+ --gpu        :  0
+------------------------------------
+
+##################################################
+Tensor("dense_1/BiasAdd:0", shape=(?, 10), dtype=float32)
+##################################################
+[7 2 1 ... 2 4 0]
+Graph accuracy: 97.12 %

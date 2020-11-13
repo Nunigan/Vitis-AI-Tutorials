@@ -1,0 +1,84 @@
+{
+    "versionMajor": "0",
+    "versionMinor": "0",
+    "usesPR": "false",
+    "platformState": "pre_synth",
+    "topModuleName": "top_wrapper",
+    "acceleratorBinaryFormat": "xclbin2",
+    "acceleratorBinaryContent": "bitstream",
+    "validAcceleratorBinaryContentValues": "dcp,bitstream",
+    "dcpFunctionStripped": "false",
+    "dcpEncrypted": "false",
+    "defaultOutputType": "hw_export",
+    "designIntent": {
+        "dataCenter": {
+            "value": "false",
+            "explicit": "false"
+        },
+        "embedded": {
+            "value": "false",
+            "explicit": "false"
+        },
+        "externalHost": {
+            "value": "false",
+            "explicit": "false"
+        },
+        "serverManaged": {
+            "value": "false",
+            "explicit": "false"
+        }
+    },
+    "devices": [
+        {
+            "name": "fpga0",
+            "type": "8",
+            "fpgaPart": "zynquplus:xczu9eg:ffvb1156:-2:i",
+            "part": {
+                "architecture": "zynquplus",
+                "device": "xczu9eg",
+                "package": "ffvb1156",
+                "speedGrade": "-2",
+                "tempGrade": "i"
+            },
+            "core": {
+                "name": "OCL_REGION_0",
+                "type": "clc_region",
+                "numComputeUnits": "60",
+                "availableResources": {
+                    "bramCount": "394",
+                    "dspCount": "1126",
+                    "lutCount": "165392",
+                    "registerCount": "344513"
+                }
+            }
+        }
+    ],
+    "files": [
+        {
+            "name": "top_wrapper.bit",
+            "type": "FULL_BIT"
+        }
+    ],
+    "vendor": "xilinx",
+    "description": "Vivado generated Hardware Platform",
+    "uniqueName": "xilinx:::0.0",
+    "fpgaPart": "zynquplus",
+    "fpgaDevice": "xczu9eg",
+    "unifiedPlatform": "true",
+    "expandablePlatform": "false",
+    "softwareEmulation": "true",
+    "hardwareEmulation": "false",
+    "usesNIFD": "false",
+    "generatedName": "Vivado",
+    "generatedVersion": "2020.1",
+    "generatedChangeList": "2902540",
+    "generatedIpChangeList": "2902112",
+    "generatedTimestamp": "Thu Nov 12 10:08:22 2020",
+    "resources": [
+        {
+            "type": "REG",
+            "count": "344513"
+        }
+    ]
+}
+

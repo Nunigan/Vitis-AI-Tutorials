@@ -1,0 +1,54 @@
+[0;33m[VAI_C][Warning] layer [Reshape] (type: Reshape) is not supported in DPU, deploy it in CPU instead.
+[m
+Kernel topology "customcnn_kernel_graph.jpg" for network "customcnn"
+kernel list info for network "customcnn"
+                               Kernel ID : Name
+                                       0 : customcnn_0
+                                       1 : customcnn_1
+
+                             Kernel Name : customcnn_0
+--------------------------------------------------------------------------------
+                             Kernel Type : CPUKernel
+                Boundary Input Tensor(s)   (H*W*C)
+                            Reshape:0(0) : 28*28*1
+
+               Boundary Output Tensor(s)   (H*W*C)
+                            Reshape:0(0) : 7*7*16
+
+                           Input Node(s)   (H*W*C)
+                                 Reshape : 28*28*1
+
+                          Output Node(s)   (H*W*C)
+                                 Reshape : 7*7*16
+
+
+
+
+                             Kernel Name : customcnn_1
+--------------------------------------------------------------------------------
+                             Kernel Type : DPUKernel
+                               Code Size : 6.93KB
+                              Param Size : 0.13MB
+                           Workload MACs : 0.27MOPS
+                         IO Memory Space : 1.02KB
+                              Mean Value : 0, 0, 0, 
+                      Total Tensor Count : 4
+                Boundary Input Tensor(s)   (H*W*C)
+                            Reshape:0(0) : 7*7*16
+
+               Boundary Output Tensor(s)   (H*W*C)
+                     dense_1_MatMul:0(0) : 1*1*10
+
+                        Total Node Count : 3
+                           Input Node(s)   (H*W*C)
+                        conv2d_Conv2D(0) : 7*7*16
+
+                          Output Node(s)   (H*W*C)
+                       dense_1_MatMul(0) : 1*1*10
+
+
+
+
+**************************************************
+* VITIS_AI Compilation - Xilinx Inc.
+**************************************************

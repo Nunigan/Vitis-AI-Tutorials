@@ -1,0 +1,78 @@
+WARNING:tensorflow:From /workspace/customcnn.py:43: conv2d (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.keras.layers.Conv2D` instead.
+WARNING:tensorflow:From /opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/python/layers/convolutional.py:424: Layer.apply (from tensorflow.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `layer.__call__` method instead.
+WARNING:tensorflow:From /workspace/customcnn.py:44: flatten (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.flatten instead.
+WARNING:tensorflow:From /workspace/customcnn.py:45: dense (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.Dense instead.
+WARNING:tensorflow:From /opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/python/ops/losses/losses_impl.py:121: where (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.where in 2.0, which has the same broadcast rule as np.where
+
+------------------------------------
+Keras version      : 2.2.4-tf
+TensorFlow version : 1.15.2
+Python version     : 3.6.10 |Anaconda, Inc.| (default, Mar 25 2020, 23:51:54) 
+[GCC 7.3.0]
+------------------------------------
+Command line options:
+ --input_height    :  28
+ --input_width     :  28
+ --input_chan      :  1
+ --epochs          :  30
+ --batchsize       :  128
+ --learnrate       :  0.001
+ --output_ckpt_path:  ./build/chkpts/float_model.ckpt
+ --infer_graph_path:  ./build/chkpts/inference_graph.pb
+ --tboard_path     :  ./build/tb_logs
+ --gpu             :  0
+------------------------------------
+
+Network input shape:  (?, 28, 28, 1)
+
+----------------------------
+ TRAINING STARTED...
+----------------------------
+ Epoch 1 / 30 - accuracy 87.16 %
+ Epoch 2 / 30 - accuracy 87.48 %
+ Epoch 3 / 30 - accuracy 87.60 %
+ Epoch 4 / 30 - accuracy 87.84 %
+ Epoch 5 / 30 - accuracy 87.86 %
+ Epoch 6 / 30 - accuracy 88.02 %
+ Epoch 7 / 30 - accuracy 88.10 %
+ Epoch 8 / 30 - accuracy 88.20 %
+ Epoch 9 / 30 - accuracy 88.28 %
+ Epoch 10 / 30 - accuracy 88.32 %
+ Epoch 11 / 30 - accuracy 88.38 %
+ Epoch 12 / 30 - accuracy 88.58 %
+ Epoch 13 / 30 - accuracy 88.66 %
+ Epoch 14 / 30 - accuracy 88.74 %
+ Epoch 15 / 30 - accuracy 88.80 %
+ Epoch 16 / 30 - accuracy 88.80 %
+ Epoch 17 / 30 - accuracy 88.84 %
+ Epoch 18 / 30 - accuracy 88.70 %
+ Epoch 19 / 30 - accuracy 88.82 %
+ Epoch 20 / 30 - accuracy 88.78 %
+ Epoch 21 / 30 - accuracy 88.86 %
+ Epoch 22 / 30 - accuracy 88.88 %
+ Epoch 23 / 30 - accuracy 88.86 %
+ Epoch 24 / 30 - accuracy 88.94 %
+ Epoch 25 / 30 - accuracy 88.92 %
+ Epoch 26 / 30 - accuracy 89.00 %
+ Epoch 27 / 30 - accuracy 88.98 %
+ Epoch 28 / 30 - accuracy 88.96 %
+ Epoch 29 / 30 - accuracy 88.94 %
+ Epoch 30 / 30 - accuracy 88.96 %
+
+----------------------------
+ SAVING CHECKPOINT & GRAPH...
+----------------------------
+ Saved checkpoint to ./build/chkpts/float_model.ckpt
+Network input shape:  (?, 28, 28, 1)
+ Saved binary inference graph to ./build/chkpts/inference_graph.pb
+ Run `tensorboard --logdir=./build/tb_logs --port 6006 --host localhost` to see the results.
